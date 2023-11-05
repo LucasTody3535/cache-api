@@ -20,7 +20,7 @@ export class RegistriesController {
       res = this.responseGeneratorUtil
                 .genGenericResponse(
                   HttpStatus.CREATED,
-                  ResponseMessages.DATA_RETRIEVED,
+                  ResponseMessages.DATA_SAVED,
                   null
                 );
     } catch(error: unknown) {

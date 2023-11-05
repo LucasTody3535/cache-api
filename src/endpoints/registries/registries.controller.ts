@@ -26,7 +26,7 @@ export class RegistriesController {
     } catch(error: unknown) {
       res = this.responseGeneratorUtil
                 .genGenericResponse(
-                  HttpStatus.INTERNAL_SERVER_ERROR,
+                  HttpStatus.NOT_MODIFIED,
                   ResponseMessages.DATA_NOT_SAVED,
                   (error as Error).message
                 );

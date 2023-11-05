@@ -1,10 +1,10 @@
 {
   "name": "cache-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Simple Cache api",
+  "author": "Toodie",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -24,6 +24,7 @@
     "@nestjs/common": "^10.0.0",
     "@nestjs/config": "^3.1.1",
     "@nestjs/core": "^10.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^10.0.0",
     "cache-manager": "^5.2.4",
     "cache-manager-redis-store": "^2.0.0",

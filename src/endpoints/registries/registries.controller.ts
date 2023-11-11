@@ -1,9 +1,10 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, UseFilters } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { Response } from 'src/models/response/response';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
+import { InvalidUuidFilter } from 'src/exceptions-filters/invalid-uuid/invalid-uuid.filter';
 
 @Controller('registries')
 export class RegistriesController {
@@ -13,25 +14,15 @@ export class RegistriesController {
   ) {}
 
   @Post()
+  @UseFilters(InvalidUuidFilter)
   updateRegistry(@Body() registry: UpdateRegistryDto) {
-    let res: Response<unknown>;
-    try {
-      this.registriesService.save(registry);
-      res = this.responseGeneratorUtil
-                .genGenericResponse(
-                  HttpStatus.CREATED,
-                  ResponseMessages.DATA_SAVED,
-                  null
-                );
-    } catch(error: unknown) {
-      res = this.responseGeneratorUtil
-                .genGenericResponse(
-                  HttpStatus.NOT_MODIFIED,
-                  ResponseMessages.DATA_NOT_SAVED,
-                  (error as Error).message
-                );
-    }
-    return res;
+    this.registriesService.save(registry);
+    return this.responseGeneratorUtil
+      .genGenericResponse(
+        HttpStatus.CREATED,
+        ResponseMessages.DATA_SAVED,
+        null
+      );
   }
 
   @Get("/:key")

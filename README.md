@@ -1,73 +1,126 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Simple Cache API
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This API provides a caching service using Redis as the underlying cache database and while simple, it has an authorization system which makes use of a Bearer token(provided by the API), making access to stored data and api secure.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+API Status: <span style="color: green; text-decoration: underline;">Completed</span>
 
-## Description
+API Documentation: <span style="color: yellow; text-decoration: underline;">Functional</span>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+API Tests: <span style="color: red; text-decoration: underline;">To be implemented</span>
 
-## Installation
+## Main Tecnologies
 
-```bash
-$ npm install
+- [Nestjs](https://docs.nestjs.com)
+- [Redis](https://redis.io/)
+- [Docker](https://www.docker.com/)
+- [Redis Commander](https://github.com/joeferner/redis-commander)
+
+## Local Testing Requirements
+
+- [Docker](https://docs.docker.com/engine/install/)
+- [Nodejs](https://nodejs.org/en/download)
+- [Git](https://git-scm.com/downloads)
+
+The following versions of the technologies mentioned above have been used in the development of this project:
+
+- Docker - v24.0.7
+- Nodejs - v21.1.0
+- Git - v2.39.2
+
+## Setup
+
+> This setup works for Linux based systems, if your system is different, please follow the specific steps for it where applicable.
+
+> Windows setup might be added later
+
+First, it is necessary to download the project, you can do it with the following code:
+
+`git clone https://github.com/LucasTody3535/cache-api.git`
+
+After that, cd into it:
+
+`cd cache-api`
+
+and install the dependencies:
+
+`npm i`
+
+In the root of the project(where you are now) there is a docker compose config(**docker-compose.yml**), which contains two images configs: redis and redis-commander, the first one is necessary for the system, without it the system will not work as it tries to connect in the port where it expects Redis to be accessible in the startup. The second one is similar to the H2 Database, which is a Browser app which lets us access the Redis database, manipulate the registries and so on. In the root run the following:
+
+`sudo docker compose up -d`
+
+> The docker must run with sudo prefix, as it requires root privileges, it can be run without using sudo as they say [here](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) but it is out of the scope of this setup.
+
+The docker compose will read our **docker-compose.yml** file in the root of our project, download the images if they not are installed and run them in the background(the **-d** flag)
+
+You can check if the containers started with the command:
+
+`sudo docker ps`
+
+This command will list all services started by docker compose
+
+After this setup you can run:
+
+`npm run start`
+
+This will start our nestjs app
+
+After all those steps, the following endpoints are accessible:
+
+- [http://localhost:3000](http://localhost:3000) - This is where our nestjs app lies
+- [http://localhost:6379](http://localhost:6379) - This is where the redis server is accessible
+- [http://localhost:8081](http://localhost:8081) - This is where the redis commander is
+- [http://localhost:3000](http://localhost:3000) - This is where the Swagger docs are accessible
+
+To stop the docker containers, you need to run `sudo docker compose stop` in the root of the project
+
+You can use to test the api the Swagger browser app, [Postman](https://www.postman.com/) or another tool, this depends entirely on your preference
+
+## Routes
+
+Now it will be covered a little about each endpoint
+
+### _**/tokens**_
+
+This route only have a **Get** request type and it is used to obtain a token
+provided by the api, this token is important as it is required for subsequent requests to other endpoints in the application
+
+### _**/registries**_
+
+This route has a **Post** and **Get** request types
+
+#### Post
+
+This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
+
+Furthermore it is necessary to send the data which will be stored in the database, if it is an invalid type, an error is thrown and the operation is stopped
+
+This endpoint will save the given data
+
+##### Data layout
+
+```http
+Authorization: Bearer <token>
 ```
 
-## Running the app
-
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```json
+{
+  data: { name: "John Doe"}
+}
 ```
 
-## Test
+#### Get
 
-```bash
-# unit tests
-$ npm run test
+This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
 
-# e2e tests
-$ npm run test:e2e
+This endpoint will return the stored data
 
-# test coverage
-$ npm run test:cov
+##### Data layout
+
+```http
+Authorization: Bearer <token>
 ```
 
-## Support
+## Tests
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+> To be added...

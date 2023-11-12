@@ -31,25 +31,15 @@ export class RegistriesController {
   }
 
   @Get("/:key")
-  getRegistry(@Param("key") key: string) {
-    let res: Response<unknown>;
-    let payload: unknown;
-    try {
-      payload = this.registriesService.obtainWith(key);
-      res = this.responseGeneratorUtil
-                .genGenericResponse(
-                  HttpStatus.FOUND,
-                  ResponseMessages.DATA_RETRIEVED,
-                  null
-                );
-    } catch(error: unknown) {
-      res = this.responseGeneratorUtil
-                .genGenericResponse(
-                  HttpStatus.NOT_FOUND,
-                  ResponseMessages.DATA_NOT_RETRIEVED,
-                  (error as Error).message
-                );
-    }
-    return res;
+  @UseFilters(TokenErrorFilter)
+  async getRegistry(@Param("key") key: string) {
+    this.encryptionService.setup();
+    const payload = await this.registriesService.obtainWith(this.encryptionService.decrypt(key));
+    return this.responseGeneratorUtil
+      .genGenericResponse(
+        HttpStatus.FOUND,
+        ResponseMessages.DATA_RETRIEVED,
+        payload
+      );
   }
 }

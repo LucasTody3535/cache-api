@@ -30,9 +30,8 @@ export class RegistriesController {
 
   @Get()
   @UseFilters(TokenErrorFilter)
-  async getRegistry(@Headers("Authorization") key: string) {
-    this.encryptionService.setup();
-    const payload = await this.registriesService.obtainWith(this.encryptionService.decrypt(key));
+  async getRegistry(@Headers("Authorization", TokenDecryptionPipe) key: string) {
+    const payload = await this.registriesService.obtainWith(key);
     return this.responseGeneratorUtil
       .genGenericResponse(
         HttpStatus.FOUND,

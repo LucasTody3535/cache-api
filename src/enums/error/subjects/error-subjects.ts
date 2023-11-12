@@ -1,5 +1,5 @@
 export enum ErrorSubjects {
-    UUID    = "UUID",
+    TOKEN   = "TOKEN",
     DATA    = "DATA",
     UNKNOWN = "UNKNOWN"
 }

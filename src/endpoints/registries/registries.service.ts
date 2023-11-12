@@ -19,8 +19,8 @@ export class RegistriesService {
     });
   }
 
-  obtainWith(key: string) {
+  async obtainWith(key: string) {
     this.uuidValidator.isUuidv4(key);
-    return this.cacheService.get(key);
+    return await this.cacheService.get(key);
   }
 }

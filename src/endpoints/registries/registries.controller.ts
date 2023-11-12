@@ -5,6 +5,7 @@ import { Response } from 'src/models/response/response';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { InvalidUuidFilter } from 'src/exceptions-filters/invalid-uuid/invalid-uuid.filter';
+import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 
 @Controller('registries')
 export class RegistriesController {
@@ -14,7 +15,7 @@ export class RegistriesController {
   ) {}
 
   @Post()
-  @UseFilters(InvalidUuidFilter)
+  @UseFilters(TokenErrorFilter)
   updateRegistry(@Body() registry: UpdateRegistryDto) {
     this.registriesService.save(registry);
     return this.responseGeneratorUtil

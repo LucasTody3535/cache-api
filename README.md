@@ -89,7 +89,7 @@ provided by the api, this token is important as it is required for subsequent re
 
 This route has a **Post** and **Get** request types
 
-#### Post
+**Post**
 
 This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
 
@@ -97,7 +97,7 @@ Furthermore it is necessary to send the data which will be stored in the databas
 
 This endpoint will save the given data
 
-##### Data layout
+**Data layout**
 
 ```http
 Authorization: Bearer <token>
@@ -109,13 +109,13 @@ Authorization: Bearer <token>
 }
 ```
 
-#### Get
+**Get**
 
 This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
 
 This endpoint will return the stored data
 
-##### Data layout
+**Data layout**
 
 ```http
 Authorization: Bearer <token>

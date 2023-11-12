@@ -2,8 +2,9 @@ import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/commo
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { Response } from 'express';
+import { UuidError } from 'src/models/errors/internal/uuid-error/uuid-error';
 
-@Catch(Error)
+@Catch(UuidError)
 export class InvalidUuidFilter<T> implements ExceptionFilter {
   constructor(private responseGeneratorUtil: ResponseGeneratorUtil) {}
 

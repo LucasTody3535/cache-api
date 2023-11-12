@@ -7,7 +7,10 @@ import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 import { Headers } from 'src/decorators/decorators';
 import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';
 import { UuidValidationPipe } from 'src/pipes/uuid-validation/uuid-validation.pipe';
+import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { Response } from 'src/models/response/response';
 
+@ApiBearerAuth()
 @Controller('registries')
 export class RegistriesController {
   constructor(
@@ -15,6 +18,23 @@ export class RegistriesController {
     private readonly responseService: ResponseService
   ) {}
 
+  @ApiOperation({ summary: 'Used to save a data in the cache' })
+  @ApiResponse({ status: 201, description: "The data was stored succesfully" })
+  @ApiResponse({ status: 403, description: "The token was not accepted, so the access was restricted" })
+  @ApiResponse({ status: 422, description: "The data is not of valid type" })
+  @ApiCreatedResponse({ description: 'The data was stored in the cache', schema: { example: new Response(HttpStatus.CREATED, ResponseMessages.DATA_SAVED, null) } })
+  @ApiBody({
+    type: UpdateRegistryDto,
+    examples: {
+      a: {
+        summary: "Valid Data",
+        description: "Data to be cached, the structure can a string, number or arbitrary object(except null)",
+        value: { data: {
+          name: "John Doe", birthday: "12/12/2222" }
+        }
+      }
+    }
+  })
   @Post()
   @UseFilters(TokenErrorFilter)
   updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {
@@ -27,6 +47,10 @@ export class RegistriesController {
       );
   }
 
+  @ApiOperation({ summary: 'Used to retrieve the data from the cache' })
+  @ApiResponse({ status: 302, description: "The data was retrieved succesfully" })
+  @ApiResponse({ status: 403, description: "The token was not accepted, so the access was restricted" })
+  @ApiCreatedResponse({ description: 'The data was retrieved from the cache', schema: { example: new Response(HttpStatus.FOUND, ResponseMessages.DATA_RETRIEVED, { name: "John Doe", birthday: "12/12/2222" }) } })
   @Get()
   @UseFilters(TokenErrorFilter)
   async getRegistry(@Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {

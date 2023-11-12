@@ -1,7 +1,7 @@
 import { Body, Controller, Get, HttpStatus, Post, UseFilters } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
-import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
+import { ResponseService } from 'src/utils/response/response.service';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 import { Headers } from 'src/decorators/decorators';
@@ -11,14 +11,14 @@ import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption
 export class RegistriesController {
   constructor(
     private readonly registriesService: RegistriesService,
-    private responseGeneratorUtil: ResponseGeneratorUtil
+    private readonly responseService: ResponseService
   ) {}
 
   @Post()
   @UseFilters(TokenErrorFilter)
   updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe) key: string) {
     this.registriesService.save(registry, key);
-    return this.responseGeneratorUtil
+    return this.responseService
       .genGenericResponse(
         HttpStatus.CREATED,
         ResponseMessages.DATA_SAVED,
@@ -30,7 +30,7 @@ export class RegistriesController {
   @UseFilters(TokenErrorFilter)
   async getRegistry(@Headers("Authorization", TokenDecryptionPipe) key: string) {
     const payload = await this.registriesService.obtainWith(key);
-    return this.responseGeneratorUtil
+    return this.responseService
       .genGenericResponse(
         HttpStatus.FOUND,
         ResponseMessages.DATA_RETRIEVED,

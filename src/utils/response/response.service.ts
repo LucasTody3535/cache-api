@@ -4,7 +4,7 @@ import { ErrorInfo } from 'src/models/errors/external/error-info/error-info';
 import { Response } from 'src/models/response/response';
 
 @Injectable()
-export class ResponseGeneratorUtil {
+export class ResponseService {
     genGenericResponse(httpStatus: HttpStatus, message: ResponseMessages, payload: unknown) {
         return new Response<unknown>(httpStatus, message, payload);
     }

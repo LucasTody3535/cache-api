@@ -3,7 +3,7 @@ import { CacheModule } from '@nestjs/cache-manager';
 import { TokensModule } from './endpoints/tokens/tokens.module';
 import { RegistriesModule } from './endpoints/registries/registries.module';
 import * as redisStore from 'cache-manager-redis-store';
-import { ResponseGeneratorUtil } from './utils/response-generator/response-generator.util';
+import { ResponseService } from './utils/response/response.service';
 
 @Module({
   imports: [CacheModule.register({
@@ -13,6 +13,6 @@ import { ResponseGeneratorUtil } from './utils/response-generator/response-gener
     port: process.env.REDIS_PORT
   }), TokensModule, RegistriesModule],
   controllers: [],
-  providers: [ResponseGeneratorUtil],
+  providers: [ResponseService],
 })
 export class AppModule {}

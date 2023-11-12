@@ -12,8 +12,7 @@ import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption
 export class RegistriesController {
   constructor(
     private readonly registriesService: RegistriesService,
-    private responseGeneratorUtil: ResponseGeneratorUtil,
-    private readonly encryptionService: EncryptionService
+    private responseGeneratorUtil: ResponseGeneratorUtil
   ) {}
 
   @Post()

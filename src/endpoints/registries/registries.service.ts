@@ -8,9 +8,11 @@ export class RegistriesService {
   constructor(@Inject(CACHE_MANAGER) private cacheService: Cache) {}
 
   save(registry: UpdateRegistryDto, key: string) {
+    new Blob([]).size
     this.cacheService.set(key, registry.data, {
       // 3600000ml = 1h
-      ttl: new Blob([registry.data]).size * 3600000
+      // 12960000000ml = 24h
+      ttl: 12960000000
     });
   }
 

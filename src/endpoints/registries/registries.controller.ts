@@ -6,6 +6,7 @@ import { ResponseMessages } from 'src/enums/response/messages/response.messages'
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 import { Headers } from 'src/decorators/decorators';
 import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';
+import { UuidValidationPipe } from 'src/pipes/uuid-validation/uuid-validation.pipe';
 
 @Controller('registries')
 export class RegistriesController {
@@ -16,7 +17,7 @@ export class RegistriesController {
 
   @Post()
   @UseFilters(TokenErrorFilter)
-  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe) key: string) {
+  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {
     this.registriesService.save(registry, key);
     return this.responseService
       .genGenericResponse(
@@ -28,7 +29,7 @@ export class RegistriesController {
 
   @Get()
   @UseFilters(TokenErrorFilter)
-  async getRegistry(@Headers("Authorization", TokenDecryptionPipe) key: string) {
+  async getRegistry(@Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {
     const payload = await this.registriesService.obtainWith(key);
     return this.responseService
       .genGenericResponse(

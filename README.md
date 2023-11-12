@@ -105,7 +105,7 @@ Authorization: Bearer <token>
 
 ```json
 {
-  data: { name: "John Doe"}
+  "data": { "name": "John Doe"}
 }
 ```
 

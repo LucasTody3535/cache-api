@@ -1,10 +1,8 @@
 import { Body, Controller, Get, HttpStatus, Param, Post, UseFilters } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
-import { Response } from 'src/models/response/response';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { InvalidUuidFilter } from 'src/exceptions-filters/invalid-uuid/invalid-uuid.filter';
 import { EncryptionService } from 'src/utils/encryption/encryption.service';
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 

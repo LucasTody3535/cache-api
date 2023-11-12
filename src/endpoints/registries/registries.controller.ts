@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, UseFilters, UsePipes } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, UseFilters, UsePipes } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';

@@ -23,7 +23,7 @@ export class TokenErrorFilter<T> implements ExceptionFilter {
         this.responseGeneratorUtil
             .genErrorResponse(
               HttpStatus.FORBIDDEN,
-              ResponseMessages.DATA_NOT_SAVED,
+              ResponseMessages.COULD_NOT_DO_OPERATION,
               errorInfo
             )
         );

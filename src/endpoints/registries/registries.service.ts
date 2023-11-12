@@ -12,15 +12,15 @@ export class RegistriesService {
   ) {}
 
   save(registry: UpdateRegistryDto) {
-    this.uuidValidator.isUuidv4(registry.key);
+    if(!this.uuidValidator.isUuidv4(registry.key)) throw new Error("Invalid v4 UUID!");
     this.cacheService.set(registry.key, registry.data, {
       // 3600000ml = 1h
       ttl: new Blob([registry.data]).size * 3600000
     });
   }
 
-  async obtainWith(key: string) {
-    this.uuidValidator.isUuidv4(key);
-    return await this.cacheService.get(key);
+  obtainWith(key: string) {
+    if(!this.uuidValidator.isUuidv4(key)) throw new Error("Invalid v4 UUID!");
+    return this.cacheService.get(key);
   }
 }

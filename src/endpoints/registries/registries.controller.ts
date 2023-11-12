@@ -1,10 +1,11 @@
-import { Body, Controller, Get, HttpStatus, Param, Post, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Param, Post, UseFilters, UsePipes } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { EncryptionService } from 'src/utils/encryption/encryption.service';
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
+import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';
 
 @Controller('registries')
 export class RegistriesController {
@@ -16,9 +17,7 @@ export class RegistriesController {
 
   @Post()
   @UseFilters(TokenErrorFilter)
-  updateRegistry(@Body() registry: UpdateRegistryDto) {
-    this.encryptionService.setup();
-    registry.key = this.encryptionService.decrypt(registry.key);
+  updateRegistry(@Body(TokenDecryptionPipe) registry: UpdateRegistryDto) {
     this.registriesService.save(registry);
     return this.responseGeneratorUtil
       .genGenericResponse(

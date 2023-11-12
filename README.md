@@ -2,11 +2,9 @@
 
 This API provides a caching service using Redis as the underlying cache database and while simple, it has an authorization system which makes use of a Bearer token(provided by the API), making access to stored data and api secure.
 
-API Status: <span style="color: green; text-decoration: underline;">Completed</span>
-
-API Documentation: <span style="color: yellow; text-decoration: underline;">Functional</span>
-
-API Tests: <span style="color: red; text-decoration: underline;">To be implemented</span>
+| Status | Documentation | Tests |
+| :---: | :---: | :---: |
+| **Completed** | **Functional** | **Missing** |
 
 ## Main Tecnologies
 

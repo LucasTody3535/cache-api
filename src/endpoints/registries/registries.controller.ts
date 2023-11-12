@@ -3,7 +3,6 @@ import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-generator.util';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { EncryptionService } from 'src/utils/encryption/encryption.service';
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
 import { Headers } from 'src/decorators/decorators';
 import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';

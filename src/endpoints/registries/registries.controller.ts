@@ -28,9 +28,9 @@ export class RegistriesController {
       );
   }
 
-  @Get("/:key")
+  @Get()
   @UseFilters(TokenErrorFilter)
-  async getRegistry(@Param("key") key: string) {
+  async getRegistry(@Headers("Authorization") key: string) {
     this.encryptionService.setup();
     const payload = await this.registriesService.obtainWith(this.encryptionService.decrypt(key));
     return this.responseGeneratorUtil

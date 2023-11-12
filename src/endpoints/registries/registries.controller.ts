@@ -5,6 +5,7 @@ import { ResponseGeneratorUtil } from 'src/utils/response-generator/response-gen
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { EncryptionService } from 'src/utils/encryption/encryption.service';
 import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
+import { Headers } from 'src/decorators/decorators';
 import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';
 
 @Controller('registries')
@@ -17,8 +18,8 @@ export class RegistriesController {
 
   @Post()
   @UseFilters(TokenErrorFilter)
-  updateRegistry(@Body(TokenDecryptionPipe) registry: UpdateRegistryDto) {
-    this.registriesService.save(registry);
+  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe) key: string) {
+    this.registriesService.save(registry, key);
     return this.responseGeneratorUtil
       .genGenericResponse(
         HttpStatus.CREATED,

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Cipher, Decipher, createCipheriv, createDecipheriv, randomBytes } from "crypto";
+import { TokenError } from 'src/models/errors/internal/token-error/token-error';
 
 @Injectable()
 export class EncryptionService {
@@ -16,7 +17,11 @@ export class EncryptionService {
     }
 
     decrypt(value: string) {
-        return this.decipher.update(value, "hex", "utf-8") + this.decipher.final("utf-8");
+        try {
+            return this.decipher.update(value, "hex", "utf-8") + this.decipher.final("utf-8");
+        } catch {
+            throw new TokenError();
+        }
     }
 
     setup() {

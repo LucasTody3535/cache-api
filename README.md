@@ -57,6 +57,18 @@ You can check if the containers started with the command:
 
 This command will list all services started by docker compose
 
+Now it is necessary to configure the redis env variables, to do so, create an empty **.env** file in the root of the project, in the terminal(keep in mind that you can use any graphical app such the file explorer to create the file) you can make this running:
+
+`> .env`
+
+This is a Linux I/O action called [**redirection**](https://tldp.org/LDP/abs/html/io-redirection.html)
+
+Inside the file you MUST define two environment variables:
+
+- **REDIS_HOST**: The host where redis server is running, in this example can be **localhost(Or 127.0.0.1)** which will be our machine
+
+- **REDIS_PORT**: The port where redis can be accessed, by default is used the port **6379**
+
 After this setup you can run:
 
 `npm run start`

@@ -28,6 +28,7 @@ export class RegistriesController {
   @ApiResponse({ status: 201, description: "The data was stored succesfully" })
   @ApiResponse({ status: 403, description: "The token was not accepted, so the access was restricted" })
   @ApiResponse({ status: 422, description: "The data is not of valid type" })
+  @ApiResponse({ status: 422, description: "The data exceeds maximum size in bytes" })
   @ApiCreatedResponse({ description: 'The data was stored in the cache', schema: { example: new Response(HttpStatus.CREATED, ResponseMessages.DATA_SAVED, null) } })
   @ApiBody({
     type: UpdateRegistryDto,

@@ -103,11 +103,10 @@ This route has a **Post** and **Get** request types
 
 **Post**
 
-This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
+This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted.
 
-Furthermore it is necessary to send the data which will be stored in the database, if it is an invalid type, an error is thrown and the operation is stopped
-
-This endpoint will save the given data
+Furthermore it is necessary to send the data which will be stored in the database along with the id associated with it, if it is an invalid type, an error is thrown and the operation is stopped. The id is used to create a unique key
+combining both uuid and the id.
 
 **Data layout**
 
@@ -117,6 +116,7 @@ Authorization: Bearer <token>
 
 ```json
 {
+  "cacheId": "user01",
   "data": { "name": "John Doe"}
 }
 ```

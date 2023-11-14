@@ -9,7 +9,7 @@ export class TokenDecryptionPipe implements PipeTransform {
   transform(value: string, _: never) {
     this.encryptionService.setup();
     try {
-      value = this.encryptionService.decrypt(value.split(" ")[1]);
+      value = this.encryptionService.decrypt(value.split(' ')[1]);
     } catch {
       throw new TokenError();
     }

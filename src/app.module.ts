@@ -6,12 +6,16 @@ import * as redisStore from 'cache-manager-redis-store';
 import { ResponseService } from './utils/response/response.service';
 
 @Module({
-  imports: [CacheModule.register({
-    isGlobal: true,
-    store: redisStore,
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT
-  }), TokensModule, RegistriesModule],
+  imports: [
+    CacheModule.register({
+      isGlobal: true,
+      store: redisStore,
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_PORT,
+    }),
+    TokensModule,
+    RegistriesModule,
+  ],
   controllers: [],
   providers: [ResponseService],
 })

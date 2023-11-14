@@ -11,7 +11,7 @@ export class RegistriesService {
     this.cacheService.set(`${uuid}_${registry.cacheId}`, registry.data, {
       // 3600000ml = 1h
       // 12960000000ml = 24h
-      ttl: 12960000000
+      ttl: 12960000000,
     });
   }
 

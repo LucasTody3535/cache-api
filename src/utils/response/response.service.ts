@@ -5,11 +5,19 @@ import { Response } from 'src/models/response/response';
 
 @Injectable()
 export class ResponseService {
-    genGenericResponse(httpStatus: HttpStatus, message: ResponseMessages, payload: unknown) {
-        return new Response<unknown>(httpStatus, message, payload);
-    }
+  genGenericResponse(
+    httpStatus: HttpStatus,
+    message: ResponseMessages,
+    payload: unknown,
+  ) {
+    return new Response<unknown>(httpStatus, message, payload);
+  }
 
-    genErrorResponse(httpStatus: HttpStatus, message: ResponseMessages, errorInfo: ErrorInfo) {
-        return new Response<ErrorInfo>(httpStatus, message, errorInfo);
-    }
+  genErrorResponse(
+    httpStatus: HttpStatus,
+    message: ResponseMessages,
+    errorInfo: ErrorInfo,
+  ) {
+    return new Response<ErrorInfo>(httpStatus, message, errorInfo);
+  }
 }

@@ -8,12 +8,19 @@ import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
   imports: [
-    ThrottlerModule.forRoot([{
-      ttl: 60000,
-      limit: 10,
-    }])
+    ThrottlerModule.forRoot([
+      {
+        ttl: 60000,
+        limit: 10,
+      },
+    ]),
   ],
   controllers: [RegistriesController],
-  providers: [RegistriesService, UuidValidator, ResponseService, EncryptionService],
+  providers: [
+    RegistriesService,
+    UuidValidator,
+    ResponseService,
+    EncryptionService,
+  ],
 })
 export class RegistriesModule {}

@@ -1,5 +1,5 @@
 export class CacheIdError extends Error {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

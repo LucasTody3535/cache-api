@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+} from '@nestjs/common';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { ResponseService } from 'src/utils/response/response.service';
 import { Request, Response } from 'express';
@@ -15,17 +20,21 @@ export class RegistryDataSizeErrorFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const errorInfo = new ErrorInfo(ErrorSubjects.DATA, ErrorMessages.REGISTRY_TOO_LARGE, [], request.path);
+    const errorInfo = new ErrorInfo(
+      ErrorSubjects.DATA,
+      ErrorMessages.REGISTRY_TOO_LARGE,
+      [],
+      request.path,
+    );
 
     response
       .status(HttpStatus.UNPROCESSABLE_ENTITY)
       .json(
-        this.responseService
-            .genErrorResponse(
-              HttpStatus.UNPROCESSABLE_ENTITY,
-              ResponseMessages.COULD_NOT_DO_OPERATION,
-              errorInfo
-            )
-        );
+        this.responseService.genErrorResponse(
+          HttpStatus.UNPROCESSABLE_ENTITY,
+          ResponseMessages.COULD_NOT_DO_OPERATION,
+          errorInfo,
+        ),
+      );
   }
 }

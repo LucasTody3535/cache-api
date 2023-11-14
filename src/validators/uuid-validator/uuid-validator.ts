@@ -3,7 +3,7 @@ import { validate, version } from 'uuid';
 
 @Injectable()
 export class UuidValidator {
-    isUuidv4(uuid: string) {
-        return validate(uuid) && version(uuid) === 4;
-    }
+  isUuidv4(uuid: string) {
+    return validate(uuid) && version(uuid) === 4;
+  }
 }

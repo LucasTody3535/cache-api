@@ -8,7 +8,8 @@ export class RegistryDataSizeValidatorPipe implements PipeTransform {
 
   transform(registry: UpdateRegistryDto, _: never) {
     const registryBlob = new Blob([registry.data]);
-    if(registryBlob.size > this.maxSizeInBytes) throw new RegistryDataSizeError();
+    if (registryBlob.size > this.maxSizeInBytes)
+      throw new RegistryDataSizeError();
     return registry;
   }
 }

@@ -1,5 +1,5 @@
 export class UuidError extends Error {
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 }

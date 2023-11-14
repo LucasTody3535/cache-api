@@ -5,7 +5,7 @@ import { validate, version } from 'uuid';
 @Injectable()
 export class UuidValidationPipe implements PipeTransform {
   transform(uuid: string, _: never) {
-    if(validate(uuid) && version(uuid) === 4) return uuid;
+    if (validate(uuid) && version(uuid) === 4) return uuid;
     throw new UuidError();
   }
 }

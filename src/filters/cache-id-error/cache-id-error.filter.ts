@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+} from '@nestjs/common';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { ResponseService } from 'src/utils/response/response.service';
 import { Request, Response } from 'express';
@@ -15,17 +20,21 @@ export class CacheIdErrorFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const errorInfo = new ErrorInfo(ErrorSubjects.CACHE_ID, ErrorMessages.CACHE_ID, [], request.path);
+    const errorInfo = new ErrorInfo(
+      ErrorSubjects.CACHE_ID,
+      ErrorMessages.CACHE_ID,
+      [],
+      request.path,
+    );
 
     response
       .status(HttpStatus.BAD_REQUEST)
       .json(
-        this.responseService
-            .genErrorResponse(
-              HttpStatus.BAD_REQUEST,
-              ResponseMessages.COULD_NOT_DO_OPERATION,
-              errorInfo
-            )
-        );
+        this.responseService.genErrorResponse(
+          HttpStatus.BAD_REQUEST,
+          ResponseMessages.COULD_NOT_DO_OPERATION,
+          errorInfo,
+        ),
+      );
   }
 }

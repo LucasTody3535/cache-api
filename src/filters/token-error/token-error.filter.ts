@@ -1,4 +1,9 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpStatus,
+} from '@nestjs/common';
 import { ResponseMessages } from 'src/enums/response/messages/response.messages';
 import { ResponseService } from 'src/utils/response/response.service';
 import { Request, Response } from 'express';
@@ -16,17 +21,21 @@ export class TokenErrorFilter<T> implements ExceptionFilter {
     const ctx = host.switchToHttp();
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
-    const errorInfo = new ErrorInfo(ErrorSubjects.TOKEN, ErrorMessages.INVALID_TOKEN, [], request.path);
+    const errorInfo = new ErrorInfo(
+      ErrorSubjects.TOKEN,
+      ErrorMessages.INVALID_TOKEN,
+      [],
+      request.path,
+    );
 
     response
       .status(HttpStatus.FORBIDDEN)
       .json(
-        this.responseService
-            .genErrorResponse(
-              HttpStatus.FORBIDDEN,
-              ResponseMessages.COULD_NOT_DO_OPERATION,
-              errorInfo
-            )
-        );
+        this.responseService.genErrorResponse(
+          HttpStatus.FORBIDDEN,
+          ResponseMessages.COULD_NOT_DO_OPERATION,
+          errorInfo,
+        ),
+      );
   }
 }

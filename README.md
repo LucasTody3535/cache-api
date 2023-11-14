@@ -6,6 +6,14 @@ This API provides a caching service using Redis as the underlying cache database
 | :---: | :---: | :---: |
 | **Completed** | **Functional** | **Missing** |
 
+## TODO
+
+| Subject | Status |
+| :--- | :---: |
+| Rate Limit | **To implement** |
+| Roles System | **To implement** |
+| Tests | **To implement** |
+
 ## Main Tecnologies
 
 - [Nestjs](https://docs.nestjs.com)

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, UseFilters } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { ResponseService } from 'src/utils/response/response.service';
@@ -11,6 +11,8 @@ import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiHeader, ApiOperation, Ap
 import { Response } from 'src/models/response/response';
 import { RegistryDataValidationPipe } from 'src/pipes/registry-data-validation/registry-data-validation.pipe';
 import { RegistryDataErrorFilter } from 'src/filters/registry-data-error/registry-data-error.filter';
+import { CacheIdValidatorPipe } from 'src/pipes/cache-id-validator/cache-id-validator.pipe';
+import { CacheIdErrorFilter } from 'src/filters/cache-id-error/cache-id-error.filter';
 
 @ApiBearerAuth()
 @Controller('registries')
@@ -54,9 +56,9 @@ export class RegistriesController {
   @ApiResponse({ status: 403, description: "The token was not accepted, so the access was restricted" })
   @ApiCreatedResponse({ description: 'The data was retrieved from the cache', schema: { example: new Response(HttpStatus.FOUND, ResponseMessages.DATA_RETRIEVED, { name: "John Doe", birthday: "12/12/2222" }) } })
   @Get()
-  @UseFilters(TokenErrorFilter)
-  async getRegistry(@Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
-    const payload = await this.registriesService.obtainWith(uuid);
+  @UseFilters(TokenErrorFilter, CacheIdErrorFilter)
+  async getRegistry(@Query("cacheId", CacheIdValidatorPipe) cacheId: string, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
+    const payload = await this.registriesService.obtainWith(uuid, cacheId);
     return this.responseService
       .genGenericResponse(
         HttpStatus.FOUND,

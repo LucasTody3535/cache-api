@@ -57,6 +57,7 @@ export class RegistriesController {
   @ApiOperation({ summary: 'Used to retrieve the data from the cache' })
   @ApiResponse({ status: 302, description: "The data was retrieved succesfully" })
   @ApiResponse({ status: 403, description: "The token was not accepted, so the access was restricted" })
+  @ApiResponse({ status: 400, description: "The cache id is invalid" })
   @ApiCreatedResponse({ description: 'The data was retrieved from the cache', schema: { example: new Response(HttpStatus.FOUND, ResponseMessages.DATA_RETRIEVED, { name: "John Doe", birthday: "12/12/2222" }) } })
   @Get()
   @UseFilters(TokenErrorFilter, CacheIdErrorFilter)

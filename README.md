@@ -109,6 +109,8 @@ provided by the api, this token is important as it is required for subsequent re
 
 This route has a **Post** and **Get** request types
 
+For both routes there is a **constraint of 10 request per minute**, if this limit is reached, the service will be inacessible until 1 minute has passed.
+
 **Post**
 
 This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted.

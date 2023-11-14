@@ -145,9 +145,9 @@ Furthermore, it is necessary to pass the cacheId as a query parameter, as along 
 Authorization: Bearer <token>
 ```
 
-```http
-https://domain.com/registries?cacheId=user01
-```
+Example o URL:
+
+- https://domain.com/registries?cacheId=user01
 
 ## Tests
 

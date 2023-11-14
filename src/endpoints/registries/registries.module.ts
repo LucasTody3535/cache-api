@@ -4,8 +4,15 @@ import { RegistriesController } from './registries.controller';
 import { UuidValidator } from 'src/validators/uuid-validator/uuid-validator';
 import { ResponseService } from 'src/utils/response/response.service';
 import { EncryptionService } from 'src/utils/encryption/encryption.service';
+import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({
+  imports: [
+    ThrottlerModule.forRoot([{
+      ttl: 60000,
+      limit: 10,
+    }])
+  ],
   controllers: [RegistriesController],
   providers: [RegistriesService, UuidValidator, ResponseService, EncryptionService],
 })

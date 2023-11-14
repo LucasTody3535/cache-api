@@ -15,7 +15,7 @@ export class RegistriesService {
     });
   }
 
-  obtainWith(uuid: string) {
-    return this.cacheService.get(uuid);
+  obtainWith(uuid: string, cacheId: string) {
+    return this.cacheService.get(`${uuid}_${cacheId}`);
   }
 }

@@ -116,6 +116,8 @@ This endpoint expects the client to send in the Authorization header the value p
 Furthermore it is necessary to send the data which will be stored in the database along with the id associated with it, if it is an invalid type, an error is thrown and the operation is stopped. The id is used to create a unique key
 combining both uuid and the id.
 
+It is important to say that the system **only accepts registries of size of 1mb(or 1,048,576 B) bytes or less** to store in the database, it could change in the future.
+
 **Data layout**
 
 ```http

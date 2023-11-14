@@ -7,16 +7,16 @@ import { Cache } from 'cache-manager';
 export class RegistriesService {
   constructor(@Inject(CACHE_MANAGER) private cacheService: Cache) {}
 
-  save(registry: UpdateRegistryDto, key: string) {
+  save(registry: UpdateRegistryDto, uuid: string) {
     new Blob([]).size
-    this.cacheService.set(key, registry.data, {
+    this.cacheService.set(uuid, registry.data, {
       // 3600000ml = 1h
       // 12960000000ml = 24h
       ttl: 12960000000
     });
   }
 
-  obtainWith(key: string) {
-    return this.cacheService.get(key);
+  obtainWith(uuid: string) {
+    return this.cacheService.get(uuid);
   }
 }

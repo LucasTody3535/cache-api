@@ -37,8 +37,8 @@ export class RegistriesController {
   })
   @Post()
   @UseFilters(TokenErrorFilter)
-  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {
-    this.registriesService.save(registry, key);
+  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
+    this.registriesService.save(registry, uuid);
     return this.responseService
       .genGenericResponse(
         HttpStatus.CREATED,
@@ -53,8 +53,8 @@ export class RegistriesController {
   @ApiCreatedResponse({ description: 'The data was retrieved from the cache', schema: { example: new Response(HttpStatus.FOUND, ResponseMessages.DATA_RETRIEVED, { name: "John Doe", birthday: "12/12/2222" }) } })
   @Get()
   @UseFilters(TokenErrorFilter)
-  async getRegistry(@Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) key: string) {
-    const payload = await this.registriesService.obtainWith(key);
+  async getRegistry(@Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
+    const payload = await this.registriesService.obtainWith(uuid);
     return this.responseService
       .genGenericResponse(
         HttpStatus.FOUND,

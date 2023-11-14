@@ -8,7 +8,7 @@ import { ErrorMessages } from 'src/enums/error/messages/error-messages';
 import { DataError } from 'src/models/errors/internal/data-error/data-error';
 
 @Catch(DataError)
-export class DataErrorFilter<T> implements ExceptionFilter {
+export class RegistryDataErrorFilter<T> implements ExceptionFilter {
   constructor(private responseService: ResponseService) {}
 
   catch(_: never, host: ArgumentsHost) {

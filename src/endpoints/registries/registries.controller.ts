@@ -44,7 +44,7 @@ export class RegistriesController {
   })
   @Post()
   @UseFilters(TokenErrorFilter, RegistryDataErrorFilter, RegistryDataSizeErrorFilter)
-  updateRegistry(@Body(RegistryDataValidationPipe, new RegistryDataSizeValidatorPipe(10)) registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
+  updateRegistry(@Body(RegistryDataValidationPipe, new RegistryDataSizeValidatorPipe(1.048576)) registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
     this.registriesService.save(registry, uuid);
     return this.responseService
       .genGenericResponse(

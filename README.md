@@ -123,14 +123,18 @@ Authorization: Bearer <token>
 
 **Get**
 
-This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted
+This endpoint expects the client to send in the Authorization header the value provided from /tokens, if it is not present, the access is restricted.
 
-This endpoint will return the stored data
+Furthermore, it is necessary to pass the cacheId as a query parameter, as along with uuid inside token, both are used to create the unique cache key in the redis database.
 
 **Data layout**
 
 ```http
 Authorization: Bearer <token>
+```
+
+```http
+https://domain.com/registries?cacheId=user01
 ```
 
 ## Tests

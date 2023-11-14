@@ -82,7 +82,7 @@ After all those steps, the following endpoints are accessible:
   - [/registries](http://localhost:3000/registries) -> Registries related services
 - [http://localhost:6379](http://localhost:6379) - This is where the redis server is accessible
 - [http://localhost:8081](http://localhost:8081) - This is where the redis commander is
-- [http://localhost:3000](http://localhost:3000) - This is where the Swagger docs are accessible
+- [http://localhost:3000/api](http://localhost:3000/api) - This is where the Swagger docs are accessible
 
 To stop the docker containers, you need to run `sudo docker compose stop` in the root of the project
 

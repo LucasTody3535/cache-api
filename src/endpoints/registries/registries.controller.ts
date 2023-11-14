@@ -9,6 +9,7 @@ import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption
 import { UuidValidationPipe } from 'src/pipes/uuid-validation/uuid-validation.pipe';
 import { ApiBearerAuth, ApiBody, ApiCreatedResponse, ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { Response } from 'src/models/response/response';
+import { RegistryDataValidationPipe } from 'src/pipes/registry-data-validation/registry-data-validation.pipe';
 
 @ApiBearerAuth()
 @Controller('registries')
@@ -37,7 +38,7 @@ export class RegistriesController {
   })
   @Post()
   @UseFilters(TokenErrorFilter)
-  updateRegistry(@Body() registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
+  updateRegistry(@Body(RegistryDataValidationPipe) registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
     this.registriesService.save(registry, uuid);
     return this.responseService
       .genGenericResponse(

@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpStatus, Post, Query, UseFilters } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Query, UseFilters, UseGuards } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
 import { ResponseService } from 'src/utils/response/response.service';
@@ -15,6 +15,7 @@ import { CacheIdValidatorPipe } from 'src/pipes/cache-id-validator/cache-id-vali
 import { CacheIdErrorFilter } from 'src/filters/cache-id-error/cache-id-error.filter';
 import { RegistryDataSizeValidatorPipe } from 'src/pipes/registry-data-size-validator/registry-data-size-validator.pipe';
 import { RegistryDataSizeErrorFilter } from 'src/filters/registry-data-size-error/registry-data-size-error.filter';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiBearerAuth()
 @Controller('registries')
@@ -44,6 +45,7 @@ export class RegistriesController {
   })
   @Post()
   @UseFilters(TokenErrorFilter, RegistryDataErrorFilter, RegistryDataSizeErrorFilter)
+  @UseGuards(ThrottlerGuard)
   updateRegistry(@Body(RegistryDataValidationPipe, new RegistryDataSizeValidatorPipe(1048576)) registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
     this.registriesService.save(registry, uuid);
     return this.responseService
@@ -60,6 +62,7 @@ export class RegistriesController {
   @ApiResponse({ status: 400, description: "The cache id is invalid" })
   @ApiCreatedResponse({ description: 'The data was retrieved from the cache', schema: { example: new Response(HttpStatus.FOUND, ResponseMessages.DATA_RETRIEVED, { name: "John Doe", birthday: "12/12/2222" }) } })
   @Get()
+  @UseGuards(ThrottlerGuard)
   @UseFilters(TokenErrorFilter, CacheIdErrorFilter)
   async getRegistry(@Query("cacheId", CacheIdValidatorPipe) cacheId: string, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
     const payload = await this.registriesService.obtainWith(uuid, cacheId);

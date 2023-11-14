@@ -147,7 +147,7 @@ Authorization: Bearer <token>
 
 Example o URL:
 
-- https://domain.com/registries?cacheId=user01
+- https://localhost:3000/registries?cacheId=user01
 
 ## Tests
 

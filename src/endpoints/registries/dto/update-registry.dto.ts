@@ -6,7 +6,7 @@ export class UpdateRegistryDto {
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
-    key: string
+    cacheId: string
 
     @ApiProperty()
     @IsObject()

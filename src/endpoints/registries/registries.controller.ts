@@ -14,6 +14,7 @@ import { RegistryDataErrorFilter } from 'src/filters/registry-data-error/registr
 import { CacheIdValidatorPipe } from 'src/pipes/cache-id-validator/cache-id-validator.pipe';
 import { CacheIdErrorFilter } from 'src/filters/cache-id-error/cache-id-error.filter';
 import { RegistryDataSizeValidatorPipe } from 'src/pipes/registry-data-size-validator/registry-data-size-validator.pipe';
+import { RegistryDataSizeErrorFilter } from 'src/filters/registry-data-size-error/registry-data-size-error.filter';
 
 @ApiBearerAuth()
 @Controller('registries')
@@ -41,7 +42,7 @@ export class RegistriesController {
     }
   })
   @Post()
-  @UseFilters(TokenErrorFilter, RegistryDataErrorFilter)
+  @UseFilters(TokenErrorFilter, RegistryDataErrorFilter, RegistryDataSizeErrorFilter)
   updateRegistry(@Body(RegistryDataValidationPipe, new RegistryDataSizeValidatorPipe(10)) registry: UpdateRegistryDto, @Headers("Authorization", TokenDecryptionPipe, UuidValidationPipe) uuid: string) {
     this.registriesService.save(registry, uuid);
     return this.responseService

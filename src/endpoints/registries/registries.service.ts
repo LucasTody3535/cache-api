@@ -8,7 +8,7 @@ export class RegistriesService {
   constructor(@Inject(CACHE_MANAGER) private cacheService: Cache) {}
 
   save(registry: UpdateRegistryDto, uuid: string) {
-    this.cacheService.set(uuid, registry.data, {
+    this.cacheService.set(`${uuid}_${registry.key}`, registry.data, {
       // 3600000ml = 1h
       // 12960000000ml = 24h
       ttl: 12960000000

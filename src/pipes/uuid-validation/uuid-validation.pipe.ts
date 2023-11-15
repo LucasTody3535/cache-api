@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { UuidError } from 'src/models/errors/internal/uuid-error/uuid-error';
+import { UuidError } from '../../models/errors/internal/uuid-error/uuid-error';
 import { validate, version } from 'uuid';
 
 @Injectable()

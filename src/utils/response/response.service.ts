@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
-import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { ErrorInfo } from 'src/models/errors/external/error-info/error-info';
-import { Response } from 'src/models/response/response';
+import { ResponseMessages } from '../../enums/response/messages/response.messages';
+import { ErrorInfo } from '../../models/errors/external/error-info/error-info';
+import { Response } from '../../models/response/response';
 
 @Injectable()
 export class ResponseService {

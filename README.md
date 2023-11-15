@@ -13,6 +13,7 @@ This API provides a caching service using Redis as the underlying cache database
 | Rate Limit | **DONE** |
 | Roles System | **To implement** |
 | Tests | **To implement** |
+| Better Error Responses | **To implement** |
 
 ## Main Tecnologies
 

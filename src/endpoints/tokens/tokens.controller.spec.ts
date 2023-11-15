@@ -1,6 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { TokensController } from './tokens.controller';
 import { TokensService } from './tokens.service';
+import { EncryptionService } from '../../utils/encryption/encryption.service';
+import { ResponseService } from '../../utils/response/response.service';
+
 
 describe('TokensController', () => {
   let controller: TokensController;
@@ -8,7 +11,7 @@ describe('TokensController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [TokensController],
-      providers: [TokensService],
+      providers: [TokensService, ResponseService, EncryptionService],
     }).compile();
 
     controller = module.get<TokensController>(TokensController);

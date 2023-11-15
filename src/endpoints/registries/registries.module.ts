@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { RegistriesController } from './registries.controller';
-import { UuidValidator } from 'src/validators/uuid-validator/uuid-validator';
-import { ResponseService } from 'src/utils/response/response.service';
-import { EncryptionService } from 'src/utils/encryption/encryption.service';
+import { UuidValidator } from '../../validators/uuid-validator/uuid-validator';
+import { ResponseService } from '../../utils/response/response.service';
+import { EncryptionService } from '../../utils/encryption/encryption.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 
 @Module({

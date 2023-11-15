@@ -4,13 +4,13 @@ import {
   ExceptionFilter,
   HttpStatus,
 } from '@nestjs/common';
-import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { ResponseService } from 'src/utils/response/response.service';
+import { ResponseMessages } from '../../enums/response/messages/response.messages';
+import { ResponseService } from '../../utils/response/response.service';
 import { Request, Response } from 'express';
-import { ErrorInfo } from 'src/models/errors/external/error-info/error-info';
-import { ErrorSubjects } from 'src/enums/error/subjects/error-subjects';
-import { ErrorMessages } from 'src/enums/error/messages/error-messages';
-import { CacheIdError } from 'src/models/errors/internal/cache-id-error/cache-id-error';
+import { ErrorInfo } from '../../models/errors/external/error-info/error-info';
+import { ErrorSubjects } from '../../enums/error/subjects/error-subjects';
+import { ErrorMessages } from '../../enums/error/messages/error-messages';
+import { CacheIdError } from '../../models/errors/internal/cache-id-error/cache-id-error';
 
 @Catch(CacheIdError)
 export class CacheIdErrorFilter<T> implements ExceptionFilter {

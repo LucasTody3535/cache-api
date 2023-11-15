@@ -1,4 +1,4 @@
-import { ResponseService } from 'src/utils/response/response.service';
+import { ResponseService } from '../../utils/response/response.service';
 import { RegistryDataStructureErrorFilter } from './registry-data-structure-error.filter';
 
 describe('RegistryDataErrorFilter', () => {

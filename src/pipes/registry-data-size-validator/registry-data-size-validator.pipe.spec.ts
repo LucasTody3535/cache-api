@@ -2,6 +2,6 @@ import { RegistryDataSizeValidatorPipe } from './registry-data-size-validator.pi
 
 describe('RegistryDataSizeValidatorPipe', () => {
   it('should be defined', () => {
-    expect(new RegistryDataSizeValidatorPipe()).toBeDefined();
+    expect(new RegistryDataSizeValidatorPipe(1048576)).toBeDefined();
   });
 });

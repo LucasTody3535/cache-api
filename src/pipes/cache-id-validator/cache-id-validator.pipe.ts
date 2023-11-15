@@ -1,5 +1,5 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
-import { CacheIdError } from 'src/models/errors/internal/cache-id-error/cache-id-error';
+import { CacheIdError } from '../../models/errors/internal/cache-id-error/cache-id-error';
 
 @Injectable()
 export class CacheIdValidatorPipe implements PipeTransform {

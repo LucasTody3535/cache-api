@@ -10,12 +10,12 @@ import {
 } from '@nestjs/common';
 import { RegistriesService } from './registries.service';
 import { UpdateRegistryDto } from './dto/update-registry.dto';
-import { ResponseService } from 'src/utils/response/response.service';
-import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { TokenErrorFilter } from 'src/filters/token-error/token-error.filter';
-import { Headers } from 'src/decorators/decorators';
-import { TokenDecryptionPipe } from 'src/pipes/token-decryption/token-decryption.pipe';
-import { UuidValidationPipe } from 'src/pipes/uuid-validation/uuid-validation.pipe';
+import { ResponseService } from '../../utils/response/response.service';
+import { ResponseMessages } from '../../enums/response/messages/response.messages';
+import { TokenErrorFilter } from '../../filters/token-error/token-error.filter';
+import { Headers } from '../../decorators/decorators';
+import { TokenDecryptionPipe } from '../../pipes/token-decryption/token-decryption.pipe';
+import { UuidValidationPipe } from '../../pipes/uuid-validation/uuid-validation.pipe';
 import {
   ApiBearerAuth,
   ApiBody,
@@ -24,13 +24,13 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
-import { Response } from 'src/models/response/response';
-import { RegistryDataStructureValidationPipe } from 'src/pipes/registry-data-structure-validation/registry-data-structure-validation.pipe';
-import { RegistryDataStructureErrorFilter } from 'src/filters/registry-data-structure-error/registry-data-structure-error.filter';
-import { CacheIdValidatorPipe } from 'src/pipes/cache-id-validator/cache-id-validator.pipe';
-import { CacheIdErrorFilter } from 'src/filters/cache-id-error/cache-id-error.filter';
-import { RegistryDataSizeValidatorPipe } from 'src/pipes/registry-data-size-validator/registry-data-size-validator.pipe';
-import { RegistryDataSizeErrorFilter } from 'src/filters/registry-data-size-error/registry-data-size-error.filter';
+import { Response } from '../../models/response/response';
+import { RegistryDataStructureValidationPipe } from '../../pipes/registry-data-structure-validation/registry-data-structure-validation.pipe';
+import { RegistryDataStructureErrorFilter } from '../../filters/registry-data-structure-error/registry-data-structure-error.filter';
+import { CacheIdValidatorPipe } from '../../pipes/cache-id-validator/cache-id-validator.pipe';
+import { CacheIdErrorFilter } from '../../filters/cache-id-error/cache-id-error.filter';
+import { RegistryDataSizeValidatorPipe } from '../../pipes/registry-data-size-validator/registry-data-size-validator.pipe';
+import { RegistryDataSizeErrorFilter } from '../../filters/registry-data-size-error/registry-data-size-error.filter';
 import { ThrottlerGuard } from '@nestjs/throttler';
 
 @ApiBearerAuth()

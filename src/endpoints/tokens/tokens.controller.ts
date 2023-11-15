@@ -1,9 +1,9 @@
 import { Controller, Get, HttpCode, HttpStatus } from '@nestjs/common';
 import { TokensService } from './tokens.service';
-import { ResponseService } from 'src/utils/response/response.service';
-import { ResponseMessages } from 'src/enums/response/messages/response.messages';
-import { Response } from 'src/models/response/response';
-import { EncryptionService } from 'src/utils/encryption/encryption.service';
+import { ResponseService } from '../../utils/response/response.service';
+import { ResponseMessages } from '../../enums/response/messages/response.messages';
+import { Response } from '../../models/response/response';
+import { EncryptionService } from '../../utils/encryption/encryption.service';
 import { ApiCreatedResponse, ApiOperation, ApiResponse } from '@nestjs/swagger';
 
 @Controller('tokens')

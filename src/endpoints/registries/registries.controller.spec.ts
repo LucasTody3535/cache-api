@@ -3,6 +3,9 @@ import { RegistriesController } from './registries.controller';
 import { RegistriesService } from './registries.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { CacheModule } from '@nestjs/cache-manager';
+import { TokenErrorFilter } from '../../filters/token-error/token-error.filter';
+import { ResponseService } from '../../utils/response/response.service';
+import { EncryptionService } from '../../utils/encryption/encryption.service';
 
 describe('RegistriesController', () => {
   let controller: RegistriesController;
@@ -16,7 +19,7 @@ describe('RegistriesController', () => {
         },
       ])],
       controllers: [RegistriesController],
-      providers: [RegistriesService],
+      providers: [RegistriesService, EncryptionService, ResponseService, TokenErrorFilter],
     }).compile();
 
     controller = module.get<RegistriesController>(RegistriesController);

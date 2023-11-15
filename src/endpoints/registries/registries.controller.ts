@@ -25,8 +25,8 @@ import {
   ApiResponse,
 } from '@nestjs/swagger';
 import { Response } from 'src/models/response/response';
-import { RegistryDataValidationPipe } from 'src/pipes/registry-data-validation/registry-data-validation.pipe';
-import { RegistryDataErrorFilter } from 'src/filters/registry-data-error/registry-data-error.filter';
+import { RegistryDataStructureValidationPipe } from 'src/pipes/registry-data-structure-validation/registry-data-structure-validation.pipe';
+import { RegistryDataStructureErrorFilter } from 'src/filters/registry-data-structure-error/registry-data-structure-error.filter';
 import { CacheIdValidatorPipe } from 'src/pipes/cache-id-validator/cache-id-validator.pipe';
 import { CacheIdErrorFilter } from 'src/filters/cache-id-error/cache-id-error.filter';
 import { RegistryDataSizeValidatorPipe } from 'src/pipes/registry-data-size-validator/registry-data-size-validator.pipe';
@@ -81,13 +81,13 @@ export class RegistriesController {
   @Post()
   @UseFilters(
     TokenErrorFilter,
-    RegistryDataErrorFilter,
+    RegistryDataStructureErrorFilter,
     RegistryDataSizeErrorFilter,
   )
   @UseGuards(ThrottlerGuard)
   updateRegistry(
     @Body(
-      RegistryDataValidationPipe,
+      RegistryDataStructureValidationPipe,
       new RegistryDataSizeValidatorPipe(1048576),
     )
     registry: UpdateRegistryDto,

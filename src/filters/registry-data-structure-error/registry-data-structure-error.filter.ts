@@ -10,10 +10,10 @@ import { Request, Response } from 'express';
 import { ErrorInfo } from 'src/models/errors/external/error-info/error-info';
 import { ErrorSubjects } from 'src/enums/error/subjects/error-subjects';
 import { ErrorMessages } from 'src/enums/error/messages/error-messages';
-import { DataError } from 'src/models/errors/internal/data-error/data-error';
+import { RegistryDataStructureError } from 'src/models/errors/internal/registry-data-structure-error/registry-data-structure-error';
 
-@Catch(DataError)
-export class RegistryDataErrorFilter<T> implements ExceptionFilter {
+@Catch(RegistryDataStructureError)
+export class RegistryDataStructureErrorFilter<T> implements ExceptionFilter {
   constructor(private responseService: ResponseService) {}
 
   catch(_: never, host: ArgumentsHost) {
